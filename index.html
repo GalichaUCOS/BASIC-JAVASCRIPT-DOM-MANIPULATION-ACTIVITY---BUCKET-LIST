@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banners</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4eae0; 
+            color: #4b3f2f; 
+            text-align: center; 
+        }
+
+        .banner {
+            background-color: #a67c52; 
+            color: white;
+            border: none;
+            padding: 15px;
+            margin: 10px auto; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center; 
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: auto; 
+            margin-right: auto; 
+            padding-left: 0; 
+            text-align: left; 
+            width: fit-content; 
+        }
+
+        li {
+            padding: 3px 0;
+        }
+
+        .input-group {
+            margin: 10px;
+            text-align: center; 
+        }
+
+        input {
+            padding: 5px;
+            border: 1px solid #8c705f;
+            border-radius: 4px;
+            margin-left: 8px;
+            background-color: #ede0d4; 
+            color: #4b3f2f;
+        }
+
+        .button-container {
+            display: flex;
+            margin: 10px;
+            justify-content: center; 
+        }
+
+        .button {
+            padding: 10px;
+            margin-right: 5px;
+            background-color: #d4a373; 
+            color: white;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            flex: 0 1 auto; 
+            max-width: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #b58350; 
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>The Bucket List</h1>
+        <ul id="bucketList">
+            <li>Get A License</li>
+            <li>Be Consistent with Exercise</li>
+            <li>Be more open to trying</li>
+        </ul>
+    </div>
+
+    <div class="input-group">
+        <label for="newItem">Add New:</label>
+        <ol><input type="text" id="newItem" placeholder="Enter a new bucket list item"></ol>
+    </div>
+
+    <div class="button-container">
+        <div class="button" onclick="addItem()">
+            Add new item
+        </div>
+        <div class="button" onclick="changeFontFamily()">
+            Change font family
+        </div>
+        <div class="button" onclick="toggleBold()">
+            Toggle to BoldText
+        </div>
+    </div>
+
+    <script>
+        function addItem() {
+            const newItemInput = document.getElementById('newItem');
+            const bucketList = document.getElementById('bucketList');
+
+            if (newItemInput.value.trim() !== '') {
+                const li = document.createElement('li');
+                li.textContent = newItemInput.value;
+                bucketList.appendChild(li);
+                newItemInput.value = '';
+            }
+        }
+
+        function changeFontFamily() {
+            const bucketList = document.getElementById('bucketList');
+            const fonts = ['Arial', 'Times New Roman', 'Brush Script MT', 'Georgia', 'Tahoma', 'Verdana'];
+            const currentFont = window.getComputedStyle(bucketList).fontFamily;
+            let currentIndex = fonts.indexOf(currentFont.split(',')[0].trim().replace(/['"]/g, ''));
+            if (currentIndex === -1 || currentIndex === fonts.length - 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            bucketList.style.fontFamily = fonts[currentIndex];
+        }
+
+        function toggleBold() {
+            const bucketList = document.getElementById('bucketList');
+            bucketList.style.fontWeight = bucketList.style.fontWeight === 'bold' ? 'normal' : 'bold';
+        }
+    </script>
+</body>
+</html>
